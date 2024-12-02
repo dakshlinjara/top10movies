@@ -1,5 +1,7 @@
+import os
 from crypt import methods
 
+from dotenv import load_dotenv
 from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
@@ -11,8 +13,9 @@ from sqlalchemy import asc
 from sqlalchemy import desc
 
 api_key = "e57bb57d8afb967602276222fa8344ab"
+load_dotenv()
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydatabase.db'  # SQLite database
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL') # SQLite database
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Suppress deprecation warnings
 
 # Step 2: Initialize SQLAlchemy
